@@ -11,9 +11,9 @@ def try_conect():
     try:  
         with conect.cursor() as cursor:
             cursor.execute("SELECT DATABASE();")
-            
             # result = cursor.fetchone()
-            # print("Conectado a la base de datos:", result[0])
+            # print("Conectado a: ", result[0])
+
     except Exception as e:
         print("Ha ocurrido un error", e)
         
