@@ -1,0 +1,53 @@
+{%extends 'layout.html'%}
+
+{% block tittle %}
+Login User
+{% endblock %}
+
+
+{% block main%}
+
+<div class="container-fluid">
+
+    <div class="row d-flex justify-content-center align-items-center py-5 my-2">
+
+        <div class="col-lg-3 py-5 my-2">
+
+            <div class="text-center">
+                <img class="logo_sm img-fluid" src=" {{url_for('img', filename='logo.png')}} " alt="Logo">
+            </div>
+            
+            <form action="" class="">
+                <div class="input-group pb-2">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <img src="{{url_for('img', filename='username_icon.svg')}}" alt="">
+                    </span>
+                    <input name="username" id="username" type="text" class="form-control input-login" placeholder="Username"
+                        aria-label="username" aria-describedby="addon-wrapping">
+                    <label for="username"></label>
+                </div>
+            
+                <div class="input-group pb-2">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <img src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
+                    </span>
+                    <input name="password" id="password" type="password" class="form-control input-login" placeholder="Password"
+                        aria-label="password" aria-describedby="addon-wrapping">
+                    <label for="password"></label>
+                </div>
+        
+                <hr>
+        
+                <div class="d-flex justify-content-center">
+                    <button id="login" class="btn btn-primary" type="submit">Login</button>
+                </div>
+            
+            </form>
+        
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}
+{{super()}}
