@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Usuarios
+{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid d-flex align-items-start p-5">
+
+    <div class="row w-100">
+
+        <div class="col-lg-3 d-flex justify-content-center">
+            <img class="logo_lg img-fluid" src="{{ url_for('img', filename='logo.png') }}" alt="Logo">
+        </div>
+
+        <div class="col-lg-9">
+
+            <h2 class="text-primary text-center">Usuarios</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Num Empleado</th>
+                        <th class="text-center" scope="col">Nombre Completo</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">Rol</th>
+                        <th class="text-center" scope="col">Campaña</th>
+                        <th class="text-center" scope="col">Editar</th>
+                        <th class="text-center" scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td class="text-center">{{ user.username }}</td>
+                        <td class="text-center">{{ user.full_name }}</td>
+                        <td class="text-center">{{ user.email }}</td>
+                        <td class="text-center">{{ user.role }}</td>
+                        <td class="text-center">{{ user.campaign }}</td>
+                        <td class="text-center"> 
+                            <input class="d-none" value="{{user.id}}" type="number">
+                            <img src="{{ url_for('img', filename='edit.svg') }}" alt="">
+                        </td>
+                        <td class="text-center">
+                            <input class="d-none" value="{{user.id}}" type="number">
+                            <img src="{{ url_for('img', filename='delete.svg') }}" alt="">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{{ super() }}

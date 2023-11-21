@@ -9,7 +9,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous">
     <!--Boostrap customizado-->
-    <link rel="stylesheet" href="{{url_for('css', filename='style.css')}}">
+    <!-- <link rel="stylesheet" href="{{url_for('css', filename='style.css')}}"> -->
 
     <!--CSS customizado-->
     <link rel="stylesheet" href="{{url_for('css', filename='styles_logo.css')}}">
@@ -25,17 +25,17 @@
         {% endblock %}
     </header>
 
-    <main class="">
+    <main>
         {% block main %}
-
+        
         {% endblock %}
     </main>
 
-    <footer class="">
+    <footer>
         {% block footer %}
         <!--Aqui va el footer-->
         {% endblock %}
     </footer>
-
+<script type="module" src='/js/app.mjs'></script>
 </body>
 </html>

@@ -1,10 +1,15 @@
 from config.db import db
 
 class Role(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    Nombre_Rol = db.Column(db.String(50), nullable=False)
-    Descripcion_Rol = db.Column(db.String(255))
+    __tablename__ = 'role'
 
-    def __init__(self, Nombre_Rol, Descripcion_Rol):
-        self.Nombre_Rol = Nombre_Rol
-        self.Descripcion_Rol = Descripcion_Rol
+    id = db.Column(db.Integer, primary_key=True)
+    role_name = db.Column(db.String(50), nullable=False)
+    role_description = db.Column(db.String(255))
+
+    def __init__(self, role_name, role_description):
+        self.role_name = role_name
+        self.role_description = role_description
+
+    def __repr__(self):
+        return f'<Role {self.role_name}>'

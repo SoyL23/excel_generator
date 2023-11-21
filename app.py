@@ -1,13 +1,16 @@
-from flask import Flask
+from flask import Flask, send_from_directory
+from config.db import db
+from config.config import Config_Development
 from routes.user import user
 from routes.home import home
-from config.db import db
-from config.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_TRACK_MODIFICATIONS
-from flask import send_from_directory
-# from flask_login import LoginManager
+from sqlalchemy import create_engine
 from flask_migrate import Migrate
+from flask.json import jsonify
 
 app = Flask(__name__)
+
+app.config.from_object(Config_Development)
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
 # Configurar la ruta estática para archivos CSS
 @app.route('/css/<path:filename>')
@@ -19,14 +22,13 @@ def css(filename):
 def img(filename):
     return send_from_directory('img', filename)
 
-# Configura la URL de la base de datos
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
+@app.route('/js/<path:filename>')
+def js(filename):
+    return send_from_directory('js', filename)
+
 # Inicializa SQLAlchemy con tu aplicación Flask
 db.init_app(app)
 migrate = Migrate(app, db)
-#Configura Login Manager
-
 
 #routes
 app.register_blueprint(home)
