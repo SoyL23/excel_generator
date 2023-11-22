@@ -10,7 +10,7 @@ class User(db.Model):
     full_name = db.Column(db.String(50))
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(66))
+    password = db.Column(db.String(128))
 
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     role = db.relationship('Role', backref='users')
@@ -31,3 +31,14 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "full_name": self.full_name,
+            "username": self.username,
+            "email": self.email,
+            "role_id": self.role_id,
+            "campaign_id": self.campaign_id,
+            "created_date": self.created_date
+        }

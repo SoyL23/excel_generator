@@ -1,7 +1,7 @@
 {%extends 'layout.html'%}
 
 {% block tittle %}
-Create User
+Edit User
 {% endblock %}
 
 
@@ -10,38 +10,18 @@ Create User
 <div class="container-fluid d-flex justify-content-center align-items-center p-5">
 
     <div class="row w-100 justify-content-evenly align-items-center">
-
-        <div class="col-lg-4">
-            <img class="logo_lg img-fluid ms-5 ps-5" src=" {{url_for('img', filename='logo.png')}} " alt="Logo">
-        </div>
-
-        <div class="col-lg-6">
-            <h2 class="text-primary">Create user</h2>
-            <form id="form_signup" class="" action="/user/create" method="POST">
-                <h6 class="text-start">Type Employee</h6>
-
-                <div class="input-group my-1 d-flex justify-content-around">
-                    <div class="d-flex align-items-center justify-content-center w-25">
-                        <label for="ET">ET</label>
-                        <input id="ET" value="ET"
-                            class="d-flex align-items-center justify-content-start w-25 input-signup" type="radio"
-                            name="prefijo" data-tipo="type_employee" required>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center w-25">
-                        <label for="AE">AE</label>
-                        <input id="AE" value="AE"
-                            class="d-flex align-items-center justify-content-start w-25 input-signup" type="radio"
-                            name="prefijo" data-tipo="type_employee" required>
-                    </div>
-                </div>
-
+        <div class="col-lg-8">
+            <h2 class="text-primary text-center">Edit user</h2>
+            <form id="form_signup" class="" action="/user/edit/{{usuario.id}}">
+                
                 <div class="input-group my-1">
                     <span class="input-group-text" id="addon-wrapping">
                         <img src=" {{url_for('img', filename='employee_icon.svg')}} " alt="">
                     </span>
-                    <input id="num_employee" name="num_employee" type="number" class="form-control input-signup"
+                    <input id="num_employee" name="num_employee" type="text" class="form-control"
                         placeholder="N° Employee" aria-label="id" aria-describedby="addon-wrapping"
-                        data-tipo="num_employee" pattern="[0-9]" required minlength="5" maxlength="6">
+                        data-tipo="num_employee" pattern="[0-9]" required minlength="5" maxlength="7"
+                        value="{{ usuario.username }}" disabled>
                     <label for="num_employee"></label>
                     <span class="error-false"></span>
                 </div>
@@ -52,7 +32,8 @@ Create User
                     </span>
                     <input id="first_name" name="first_name" type="text" class="form-control input-signup"
                         placeholder="First Name" aria-label="first_name" aria-describedby="addon-wrapping"
-                        data-tipo="first_name" required minlength="3" maxlength="25">
+                        data-tipo="first_name" required minlength="3" maxlength="25"
+                        value="{{ usuario.first_name }}">
                     <label for="first_name"></label>
                     <span class="error-false"></span>
                 </div>
@@ -63,33 +44,9 @@ Create User
                     </span>
                     <input id="last_name" name="last_name" type="text" class="form-control input-signup"
                         placeholder="Last Name" aria-label="last_name" aria-describedby="addon-wrapping"
-                        data-tipo="last_name" required minlength="3" maxlength="25">
+                        data-tipo="last_name" required minlength="3" maxlength="25"
+                        value="{{ usuario.last_name }}">
                     <label for="last_name"></label>
-                    <span class="error-false"></span>
-                </div>
-
-                <div class="input-group my-1">
-                    <span class="input-group-text" id="addon-wrapping">
-                        <img src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
-                    </span>
-                    <input id="password" name="password" type="password" class="form-control input-signup"
-                    placeholder="Password" aria-label="password" aria-describedby="addon-wrapping"
-                    data-tipo="password" required minlength="8" maxlength="15"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_=+-])(.{8,15})$">
-                    <label for="password"></label>
-
-                    <span class="error-false"></span>
-                </div>
-
-                <div class="input-group my-1">
-                    <span class="input-group-text" id="addon-wrapping">
-                        <img src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
-                    </span>
-                    <input id="confirm-password" name="confirm-password" type="password"
-                        class="form-control input-signup" placeholder="Confirm Password" aria-label="confirm-password"
-                        aria-describedby="addon-wrapping" data-tipo="password" required minlength="8" maxlength="15"
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_=+-])(.{8,15})$">
-                    <label for="confirm-password"></label>
                     <span class="error-false"></span>
                 </div>
 
@@ -99,7 +56,8 @@ Create User
                     </span>
                     <input id="email" name="email" type="email" class="form-control input-login"
                         placeholder="Email@example.com" aria-label="email" aria-describedby="addon-wrapping"
-                        data-tipo="email" required>
+                        data-tipo="email" required
+                        value="{{ usuario.email }}">
                     <label for="email"></label>
                     <span class="error-false"></span>
                 </div>
@@ -108,7 +66,7 @@ Create User
                 <div class="form-floating my-1">
                     <select id="campaign" name="campaign" class="form-select input-signup" data-tipo="campaign"
                         required>
-                        <option selected disabled>Select a campaign</option>
+                        <option disabled>Select a campaign</option>
                         <option value="1">UP</option>
                         <option value="2">ATH Movil</option>
                         <option value="3">Place to Pay</option>
@@ -118,7 +76,7 @@ Create User
                 
                 <div class="form-floating my-1">
                     <select id="role" name="role" class="form-select input-signup" data-tipo="role" required>
-                        <option selected disabled>Select a role</option>
+                        <option disabled>Select a role</option>
                         <option value="1">Analyst</option>
                         <option value="2">Supervisor</option>
                     </select>

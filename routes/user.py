@@ -16,6 +16,14 @@ def require_content_type(content_type):
         return wrapper
     return decorator
 
+@user.route('/user/login')
+def login_user():
+    return render_template('sign_in.html')
+
+@user.route('/user/new')
+def new_user():
+    return render_template('sign_up.html')
+
 @user.route('/user/create', methods=['POST'])
 @require_content_type('application/json')
 def create_user():
@@ -54,33 +62,46 @@ def create_user():
 
                     return jsonify({'response': 'Usuario creado exitosamente'})
         except Exception as e:
-            return jsonify({'response': f'Error: {e}'})
+            return jsonify({f'Ha ocurrido un error: {e}'})
 
+@user.route('/user/edit/<id>', methods=['GET','POST'])
+def edit_user(id):
+    if request.method == 'GET':
+        user = User.query.get(id)
+        first_name ,last_name = str(user.full_name).split(" ")
+        usuario = {
+            'id':int(user.id),
+            'username': str(user.username),
+            'first_name':first_name,
+            'last_name':last_name,
+            'email': str(user.email),
+            'role':str(user.role_id),
+            'campaign':str(user.campaign_id),
+            'password': str(user.password)
+        }
+        return render_template('edit_user.html', usuario=usuario)
+    else:
+        pass
+    
 
-@user.route('/user/login')
-def login_user():
-    return render_template('sign_in.html')
+@user.route('/user/delete/<id>')
+def delete_user(id):
+    try:
+        user = User.query.get(id)
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return f'Se ha eliminado el usuario {user.username}'
+        else:
+            return f'No se ha encontrado ningún usuario con ID {id}'
+    except Exception as e:
+        return jsonify({f'Ha ocurrido un error: {e}'})
 
-@user.route('/user/new')
-def new_user():
-    return render_template('sign_up.html')
-
-
-@user.route('/user/edit')
-def edit_user():
-    pass    
-
-@user.route('/user/delete')
-def delete_user():
-    pass
-
-@user.route('/user/get')
-def get_user():
-
-    pass
 
 @user.route('/user/users')
 def get_users():
-    users = User.query.all()
-    print(users)
-    return render_template('get_users.html', users=users)
+    try:
+        usuarios = User.query.all()
+        return render_template('get_users.html', usuarios=usuarios)
+    except Exception as e:
+        return jsonify({f'Ha ocurrido un error: {e}'})

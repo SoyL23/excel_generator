@@ -32,20 +32,27 @@ Usuarios
                 </thead>
 
                 <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td class="text-center">{{ user.username }}</td>
-                        <td class="text-center">{{ user.full_name }}</td>
-                        <td class="text-center">{{ user.email }}</td>
-                        <td class="text-center">{{ user.role }}</td>
-                        <td class="text-center">{{ user.campaign }}</td>
+                    {% for usuario in usuarios %}
+                    <tr scope="">
+                        <td class="text-center">
+                            <p class="">
+                                {{ usuario.username }}
+                            </p>
+                    </td>
+                        <td class="text-center">{{ usuario.full_name }}</td>
+                        <td class="text-center">{{ usuario.email }}</td>
+                        <td class="text-center">{{ usuario.role }}</td>
+                        <td class="text-center">{{ usuario.campaign }}</td>
                         <td class="text-center"> 
-                            <input class="d-none" value="{{user.id}}" type="number">
-                            <img src="{{ url_for('img', filename='edit.svg') }}" alt="">
+                            <a class="btn btn-warning" href=' {{url_for("user.edit_user", id=usuario.id)}} '>
+                                <img src="{{ url_for('img', filename='edit.svg')}}" alt="">
+                            </a>
                         </td>
                         <td class="text-center">
-                            <input class="d-none" value="{{user.id}}" type="number">
-                            <img src="{{ url_for('img', filename='delete.svg') }}" alt="">
+                            
+                            <a class="btn btn-danger" href=''>
+                                <img src="{{ url_for('img', filename='delete.svg')}}" alt="">
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
