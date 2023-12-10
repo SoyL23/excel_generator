@@ -1,7 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, redirect
 
 home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-    return "<h1>Index</h1>"
+    return redirect('/user/login')

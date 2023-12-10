@@ -16,25 +16,23 @@ def require_content_type(content_type):
         return wrapper
     return decorator
 
-@user.route('/user/login')
+@user.route('/user/login', methods=['GET', 'POST'])
 def login_user():
-    return render_template('sign_in.html')
-
-@user.route('/user/new')
-def new_user():
-    return render_template('sign_up.html')
-
-@user.route('/user/create', methods=['POST'])
-@require_content_type('application/json')
-def create_user():
-    user_data = request.get_json()
-    if not user_data:
-        return jsonify({"La petición está vacía"}, 400)
+    if request.method == 'GET':
+        return render_template('sign_in.html')
     else:
-        print(user_data)
+        username = request.form['username']
+        password = request.form['password']
+
+@user.route('/user/new', methods=['GET', 'POST'])
+def new_user():
+    if request.method == 'GET':
+        return render_template('sign_up.html')
+    else:
+        user_data = request.get_json()
         try:
             if user_data['password'] != user_data['confirm-password']:
-                return jsonify({'response': 'Las contraseñas no coinciden'})
+                return jsonify('Las contraseñas no coinciden')
             else:
                 if 'AE' in user_data:
                     type_employee = user_data['AE']
@@ -44,7 +42,7 @@ def create_user():
                     type_employee = None
 
                 if type_employee is None:
-                    return jsonify({'response': 'Falta tipo de empleado'})
+                    return jsonify('Falta tipo de empleado')
                 else:
                     username = type_employee + str(user_data['num_employee'])
                     first_name = user_data['first_name']
@@ -60,14 +58,14 @@ def create_user():
                     db.session.add(new_user)
                     db.session.commit()
 
-                    return jsonify({'response': 'Usuario creado exitosamente'})
+                    return jsonify(f'Usuario  {username} creado exitosamente')
         except Exception as e:
-            return jsonify({f'Ha ocurrido un error: {e}'})
+            return jsonify(f'Ha ocurrido un error: {e}')
 
 @user.route('/user/edit/<id>', methods=['GET','POST'])
 def edit_user(id):
+    user = User.query.get(id)
     if request.method == 'GET':
-        user = User.query.get(id)
         first_name ,last_name = str(user.full_name).split(" ")
         usuario = {
             'id':int(user.id),
@@ -81,6 +79,8 @@ def edit_user(id):
         }
         return render_template('edit_user.html', usuario=usuario)
     else:
+        user_data = request.get_json
+
         pass
     
 

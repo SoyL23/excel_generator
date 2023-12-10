@@ -1,38 +1,43 @@
-export function user_validate(input) {
-
-    const input_type = input.dataset.tipo;
-    const container = input.parentElement;
-    const span = container.querySelector('.error-false');
-
-    input.addEventListener('focusout', (e) => {
-
-        if (input.validity.valid){
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-            return true;
-        } 
-        else{
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-            addClass(span, 'text-danger align-self-center p-2');
-            span.innerHTML = show_error(input_type, input);
-            return false;
+export function getData(inputs) {
+    const campaignSelect = document.getElementById('campaign');
+    const roleSelect = document.getElementById('role');
+    const campaignValue = campaignSelect.options[campaignSelect.selectedIndex].value;
+    const roleValue = roleSelect.options[roleSelect.selectedIndex].value;
+    const user_data = {};
+    inputs.forEach((input) => {
+        if (input.type != 'radio') {
+            user_data[input.name] = input.value;
+        }
+        if (input.type === 'radio' && input.checked) {
+            user_data[input.id] = input.value;
         }
     });
-
-    input.addEventListener('focusin', (e) => {
-       span.innerHTML='';
-    });
+    user_data['role'] = roleValue;
+    user_data['campaign'] = campaignValue;
+    return user_data
 }
 
-function show_error(input_type, input) {
-    let message = "";
-    type_errors.forEach((error) => {
-        if (input.validity[error]) {
-            message = error_messages[input_type][error];
-        }
-    })
-    return (message)
+export function showPassword(){
+    const password_inputs = document.querySelectorAll("input[type='password']");
+    const spans = document.querySelectorAll('.visibility');
+    spans.forEach((span) => {
+        span.addEventListener('click', (e) => {
+            console.log(e)
+            password_inputs.forEach((password_input) => {
+                if(password_input.type == 'text'){
+                    password_input.type = 'password'
+                } else if (password_input.type = 'password'){
+                    password_input.type = 'text'
+                }
+            });
+        });
+    });    
+}
+
+export function showResponse(response) {
+    const span = document.querySelector('.response')
+    addClass(span, 'response alert alert-success')
+    span.innerHTML = response
 }
 
 export function addClass(element, className) {
@@ -42,11 +47,11 @@ export function addClass(element, className) {
     }
 }
 
-const error_messages = {
+export const errors= {
     type_employee: {
         valueMissing: 'Este campo no puede estar vacío',
     },
-    num_employee: {
+    numemployee: {
         valueMissing: 'Este campo no puede estar vacío',
         patternMismatch: 'El número de empleado debe tener entre 5 y 6 dígitos.',
         typeMismatch: 'Este campo solo admite numeros',
@@ -63,8 +68,6 @@ const error_messages = {
     },
     password: {
         valueMissing: 'Este campo no puede estar vacío',
-        patternMismatch: 'Min 8, Max 15, mayúsculas, minúsculas, números y un caracter especial',
-        typeMismatch: 'Este password no es válido',
     },
     email: {
         valueMissing: 'Este campo no puede estar vacío',
@@ -73,17 +76,13 @@ const error_messages = {
     },
     campaign: {
         valueMissing: 'Este campo no puede estar vacío',
-        patternMismatch: '',
-        typeMismatch: '',
     },
     role: {
         valueMissing: 'Este campo no puede estar vacío',
-        patternMismatch: 'Prueba Pattern',
-        typeMismatch: ' Prueba type',
     }
 }
 
-const type_errors = [
+export const typeErrors = [
     'valueMissing',
     'typeMismatch',
     'patternMismatch',

@@ -1,9 +1,17 @@
 .logo_sm{
-    max-height: 90px;
-    max-width: 90px;
+    max-height: 50px;
+    max-width: 50px;
 }
 
 .logo_lg{
-    max-height: 400px;
-    max-width: 390px;
+    max-height: 350px;
+    max-width: 340px;
+}
+
+.text-error{
+    font-size: x-small;
+}
+
+.visibility:hover{
+    cursor: pointer;
 }

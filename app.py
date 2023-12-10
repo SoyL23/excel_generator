@@ -33,4 +33,3 @@ migrate = Migrate(app, db)
 #routes
 app.register_blueprint(home)
 app.register_blueprint(user)
-

@@ -1,52 +1,26 @@
-import { user_validate} from './sign_up.mjs';
+import { getData, showPassword } from './sign_up.mjs';
 import { create_user } from './user_controller.mjs';
+import {passwordValidate, inputValidate} from './validations.mjs'
 
+const inputs = document.querySelectorAll('input');
+const form = document.querySelector('#form_signup')
+const password_inputs = document.querySelectorAll("input[type='password']");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const inputs = document.querySelectorAll('input');
-    const form = document.querySelector('#form_signup')
-    const submit =  document.querySelector('#submit_login')
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const user_data = getData(inputs)
+  create_user(user_data);
+  form.reset()
+});
 
-    const campaignSelect = document.getElementById('campaign');
-    
-    const roleSelect = document.getElementById('role');
+document.addEventListener('DOMContentLoaded', () => {
 
-    const user_data = {};
+  inputs.forEach((input) => {
+      inputValidate(input)
+  });
 
-    inputs.forEach((input) => {
-        user_validate(input);
-    });
-
-
-
-    inputs.forEach((input) => {
-    if (input.classList.contains('is-invalid')) {
-        console.log('Hay campos invalidos')
-    }else{
-        submit.removeAttribute('disabled')
-    }
-    });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-        const campaignValue = campaignSelect.options[campaignSelect.selectedIndex].value;
-        const roleValue = roleSelect.options[roleSelect.selectedIndex].value;
-        inputs.forEach((input) => {
-          if(input.type != 'radio'){
-            user_data[input.id] = input.value;
-          }
-          if (input.type === 'radio' && input.checked) {
-            user_data[input.id] = input.value;
-          }
-        });
-
-        user_data['role'] = roleValue;
-        user_data['campaign'] = campaignValue;
-
-        response = create_user(user_data);
-        console.log(response)
-
-    });
-      
-
+  password_inputs.forEach((password_input) => {
+    passwordValidate(password_input)
+  });
+  showPassword()
 });
