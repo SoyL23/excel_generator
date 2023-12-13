@@ -13,7 +13,7 @@ Aplicación web capaz de generar reportes en excel con datos de una base de dato
 y almacenarlos en otra, con el objetivo de automatizar el proceso de llenado de exceles por parte
 de los Agentes del area de UP
 
-Ultima actualización: 21 - Nov - 2023
+Ultima actualización: 12 - DEC - 2023
 Todas las librerias utilizadas en el back-end estan en el archivo requirements.txt
 Desarrollado por: https://github.com/SoyL23
 """
