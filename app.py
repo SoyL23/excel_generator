@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory
 from config.db import db
 from config.config import Config_Development
 from routes.user import user
+from routes.auth import auth
 from routes.home import home
 from sqlalchemy import create_engine
 from flask_migrate import Migrate
@@ -33,3 +34,4 @@ migrate = Migrate(app, db)
 #routes
 app.register_blueprint(home)
 app.register_blueprint(user)
+app.register_blueprint(auth)

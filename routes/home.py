@@ -4,4 +4,4 @@ home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-    return redirect('/user/login')
+    return redirect('/auth/login')

@@ -12,4 +12,9 @@ class Role(db.Model):
         self.role_description = role_description
 
     def __repr__(self):
-        return f'<Role {self.role_name}>'
+        return f'{self.role_name}'
+    
+    def to_dict(self):
+        return {
+            "role": self.role_name,
+        }

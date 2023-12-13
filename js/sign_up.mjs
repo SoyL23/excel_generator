@@ -20,16 +20,26 @@ export function getData(inputs) {
 export function showPassword(){
     const password_inputs = document.querySelectorAll("input[type='password']");
     const spans = document.querySelectorAll('.visibility');
+    
     spans.forEach((span) => {
+        const img = span.querySelector('.visibilityImg');
+        const img2 = span.querySelector('.d-none')
         span.addEventListener('click', (e) => {
-            console.log(e)
+            
             password_inputs.forEach((password_input) => {
                 if(password_input.type == 'text'){
-                    password_input.type = 'password'
+                    password_input.type = 'password';
+                    img2.classList.remove('invisibilityImg')
+                    addClass(img, 'd-none')
+                    addClass(img2, 'visibilityImg')
                 } else if (password_input.type = 'password'){
-                    password_input.type = 'text'
+                    password_input.type = 'text';
+                    img.classList.remove('d-none')
+                    addClass(img, 'visibilityImg')
                 }
+                
             });
+            
         });
     });    
 }

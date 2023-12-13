@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, abort, make_response, jsonify
+from flask import Blueprint, render_template, request, jsonify, session
 from werkzeug.security import generate_password_hash
 from models.user import User
 from werkzeug.exceptions import BadRequest, UnsupportedMediaType
@@ -15,14 +15,6 @@ def require_content_type(content_type):
             return f(*args, **kwargs)
         return wrapper
     return decorator
-
-@user.route('/user/login', methods=['GET', 'POST'])
-def login_user():
-    if request.method == 'GET':
-        return render_template('sign_in.html')
-    else:
-        username = request.form['username']
-        password = request.form['password']
 
 @user.route('/user/new', methods=['GET', 'POST'])
 def new_user():

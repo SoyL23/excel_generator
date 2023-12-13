@@ -19,3 +19,14 @@ class Campaign(db.Model):
         self.campaign_description = campaign_description
         self.pais_id = pais_id
 
+    def __repr__(self):
+        return f'{self.campaign_name}'
+    def to_dict(self):
+        pais = self.pais.to_dict()
+        return {
+            "id":self.id,
+            "campaign": self.campaign_name,
+            "pais": pais['pais'],
+            "description": self.campaign_description
+        }
+

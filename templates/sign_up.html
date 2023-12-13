@@ -9,9 +9,9 @@ Create User
 
 <div class="container">
 
-    <form id="form_signup" class="my-2 mb-2 p-3" action="" method="POST">
+    <form id="form_signup" class="my-2 mb-2" action="" method="POST">
 
-        <div class="d-flex">
+        <div class="d-flex"> 
             <div class="input-group w-25 align-items-center justify-content-center ms-1 me-1 my-1 mb-1">
                 <label for="ET">ET</label>
                 <input id="ET" value="ET" class="w-25 input-signup" type="radio" name="prefijo"
@@ -26,9 +26,9 @@ Create User
                 <span class="input-group-text" id="addon-wrapping">
                     <img src=" {{url_for('img', filename='employee_icon.svg')}} " alt="">
                 </span>
-                <input id="N° Empleado" name="num_employee" type="text" class="form-control"
-                    placeholder="N° Employee" aria-label="id" aria-describedby="addon-wrapping" data-tipo="numemployee"
-                    required pattern="^\d{5,6}$">
+                <input id="N° Empleado" name="num_employee" type="text" class="form-control" placeholder="N° Employee"
+                    aria-label="id" aria-describedby="addon-wrapping" data-tipo="numemployee" required
+                    pattern="^\d{5,6}$">
                 <label for="N° Empleado"></label>
                 <span class="error-false"></span>
             </div>
@@ -45,14 +45,13 @@ Create User
                 <label for="Nombre"></label>
                 <span class="error-false"></span>
             </div>
-    
+
             <div class="input-group ms-1 me-1 my-1 mb-1">
                 <span class="input-group-text" id="addon-wrapping">
                     <img src="{{url_for('img', filename='name_icon.svg')}}" alt="">
                 </span>
                 <input id="Apellido" name="last_name" type="text" class="form-control" placeholder="Last Name"
-                    aria-label="last_name" 
-                    aria-describedby="addon-wrapping" data-tipo="last_name" required 
+                    aria-label="last_name" aria-describedby="addon-wrapping" data-tipo="last_name" required
                     pattern="^[a-zA-Z]{3,25}$">
                 <label for="Apellido"></label>
                 <span class="error-false"></span>
@@ -62,19 +61,21 @@ Create User
         <div class="d-flex">
             <div class="input-group ps-1 pe-1 py-1 pb-1 w-50">
                 <span class="visibility input-group-text" id="addon-wrapping">
-                    <img src="{{url_for('img', filename='visibility_icon.svg')}}" alt="">
+                    <img class="visibilityImg" src=" {{url_for('img', filename='visibility_icon.svg')}} " alt="">
+                    <img class="invisibilityImg" src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
                 </span>
-                <input id="Contraseña" name="password" type="password" class="form-control"
-                    placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" data-tipo="password"
-                    required
+                <input id="Contraseña" name="password" type="password" class="form-control" placeholder="Password"
+                    aria-label="password" aria-describedby="addon-wrapping" data-tipo="password" required
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*()_+-]).{8,15}$">
-                <label for="Contraseña"></label>  
+                <label for="Contraseña"></label>
                 <span class="error-false"></span>
             </div>
 
             <div class="input-group ps-1 pe-1 py-1 pb-1 w-50">
                 <span class="visibility input-group-text" id="addon-wrapping">
-                    <img src="{{url_for('img', filename='visibility_icon.svg')}}" alt="">
+                    <img id="" class="visibilityImg" src="{{url_for('img', filename='visibility_icon.svg')}}" alt="">
+                    <img class="invisibilityImg" src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
+
                 </span>
                 <input id="Confirmacion de contraseña" name="confirm-password" type="password" class="form-control"
                     placeholder="Confirm Password" aria-label="confirm-password" aria-describedby="addon-wrapping"
@@ -126,11 +127,8 @@ Create User
     </form>
 </div>
 
-
 <div class="col-12 d-flex justify-content-center align-items-center">
     <span class="response" role="alert"></span>
 </div>
-
-
 {%endblock%}
 {{super()}}

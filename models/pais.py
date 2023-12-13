@@ -11,3 +11,11 @@ class Pais(db.Model):
         super().__init__()
         self.pais = pais
         self.pais_description = pais_description
+
+    def __repr__(self):
+        return f'<{self.pais}>'
+    
+    def to_dict(self):
+        return {
+            "pais": self.pais,
+        }

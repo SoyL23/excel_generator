@@ -16,36 +16,38 @@ Login User
             <div class="text-center">
                 <img class="logo_sm img-fluid" src=" {{url_for('img', filename='logo.png')}} " alt="Logo">
             </div>
-            
-            <form action="/user/login" class="">
+
+            <form action="/auth/login" method="POST" class="">
                 <div class="input-group pb-2">
                     <span class="input-group-text" id="addon-wrapping">
                         <img src="{{url_for('img', filename='username_icon.svg')}}" alt="">
                     </span>
-                    <input name="username" id="username" type="text" class="form-control input-login" placeholder="Username"
-                        aria-label="username" aria-describedby="addon-wrapping">
+                    <input name="username" id="username" type="text" class="form-control input-login"
+                        placeholder="Username" aria-label="username" aria-describedby="addon-wrapping"
+                        pattern="[a-zA-Z0-9]+">
+
                     <label for="username"></label>
                 </div>
-            
+
                 <div class="input-group pb-2">
                     <span class="input-group-text" id="addon-wrapping">
                         <img src="{{url_for('img', filename='pass_icon.svg')}}" alt="">
                     </span>
-                    <input name="password" id="password" type="password" class="form-control input-login" placeholder="Password"
-                        aria-label="password" aria-describedby="addon-wrapping">
+                    <input name="password" id="password" type="password" class="form-control input-login"
+                        placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
                     <label for="password"></label>
                 </div>
-        
+
                 <hr>
-        
+
                 <div class="d-flex justify-content-center">
                     <button id="login" class="btn btn-primary" type="submit">Login</button>
                 </div>
-            
+
             </form>
-        
+
         </div>
-    
+
     </div>
 </div>
 
