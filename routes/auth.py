@@ -1,6 +1,6 @@
 from models.user import User
 from flask import session, request, render_template, jsonify, Blueprint, redirect
-from datetime import datetime
+from datetime import datetime, date
 
 auth = Blueprint('auth', __name__)
 
@@ -18,12 +18,19 @@ def login_user():
             else:
                 if user.check_password(user.password, password):
                     role = user.role.to_dict()
+                    campaign = user.campaign.to_dict()
+                    fecha = datetime.now()
+                    fecha_simple = date(fecha.year, fecha.month, fecha.day)
+
                     session['status'] = True
                     session['fullname'] = user.full_name
                     session['username'] = user.username
-                    session['role'] = role
-                    session['campaign'] = user.campaign.to_dict()
-                    return f'Logueado {session["username"]}' #render_template('')
+                    session['role'] = role['role']
+                    session['campaign'] = campaign['campaign']
+                    session['fecha'] = fecha_simple
+                    print(session['fecha'])
+
+                    return render_template('index.html', session=session)
                 else:
                     return jsonify({'Invalid Password'})
         except Exception as ex:

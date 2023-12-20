@@ -41,7 +41,7 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "role_id": self.role_id,
-            "role": role,
+            "role": role['role'],
             "campaign_id": self.campaign_id,
             "campaign":campaign,
             "created_date": self.created_date
